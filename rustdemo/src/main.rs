@@ -1,22 +1,31 @@
-use std::io;
+use yew::prelude::*;
+
+struct Model {
+    value: i64
+}
+
+fn app() -> Html {
+    let use_state(| Model {
+        value: 0
+    });
+
+    let onclick = {
+    let state = state.clone();
+
+    Callback::from(move |_| {
+        state.set(Model {
+            value: state.value + 1
+        })
+    })
+}
+html! {
+    <div>
+    <button {onclick}>{"1"}>click</button>
+    <p>{state.value}</p>
+    </div>
+ }
 
 fn main() {
-    let a = [1, 2, 3, 4, 5];
-
-    println!("Please enter an array index.");
-
-    let mut index = String::new();
-
-    io::stdin()
-        .read_line(&mut index)
-        .expect("Failed to read line");
-
-    let index: usize = index
-        .trim()
-        .parse()
-        .expect("Index entered was not a number");
-
-    let element = a[index];
-
-    println!("The value of the element at index {index} is: {element}");
+    yew::start_app::<App>();
+}
 }
